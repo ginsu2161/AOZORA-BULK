@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:description" content="AOZORA TOUR CENTER 団体旅程 宿泊料金一覧">
+<title>AOZORA TOUR CENTER 団体旅程 宿泊料金一覧</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+<button class="logo" id="logoBtn" title="初期化してホームに戻る">
+<span class="mark"><img src="aozora_logo.jpg" alt="AOZORA TOUR CENTER"></span>
+<span class="word">AOZORA TOUR CENTER</span>
+</button>
+</div>
+
+<div class="stage">
+<div class="intro">
+<h1>団体旅程 宿泊料金一覧</h1>
+<p>人数を選ぶと、以降の日程すべてに適用されます。日程ごとにホテルとチェックイン日を選ぶと、右側にお部屋タイプ別の料金が表示されます。最大10日程まで追加できます。</p>
+</div>
+
+<div class="guest-panel">
+<label for="guestInput">人数<span class="guest-sub">（全日程 共通）</span></label>
+<div class="guest-input-wrap">
+<input type="number" id="guestInput" min="1" max="99" step="1" placeholder="例: 2">
+<span class="guest-unit">名</span>
+</div>
+</div>
+
+<div class="itinerary" id="itineraryList"></div>
+
+<div class="itinerary-footer">
+<button class="add-row-btn" id="addRowBtn">
+<svg viewBox="0 0 20 20" width="16" height="16"><path d="M10 3v14M3 10h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+日程を追加
+</button>
+<span class="row-count" id="rowCount"></span>
+</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

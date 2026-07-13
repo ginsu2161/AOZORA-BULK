@@ -182,6 +182,13 @@ const hotelsSorted = [...DB.hotels].sort((a, b) => {
 
 function pad2(n){ return n < 10 ? '0' + n : '' + n; }
 
+function addDays(dateStr, days){
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  dt.setUTCDate(dt.getUTCDate() + days);
+  return `${dt.getUTCFullYear()}-${pad2(dt.getUTCMonth() + 1)}-${pad2(dt.getUTCDate())}`;
+}
+
 function formatDateDisplay(dateStr){
   const [y, m, d] = dateStr.split('-').map(Number);
   return `${y}年${m}月${d}日`;
@@ -350,7 +357,16 @@ function updateFooter(){
 
 function addRow(){
   if(rows.length >= MAX_ROWS) return;
+  const prevRow = rows[rows.length - 1];
   const row = { id: nextId++, date: '', hotel: '' };
+
+  if(prevRow && prevRow.date){
+    const candidate = addDays(prevRow.date, 1);
+    if((!minD || candidate >= minD) && (!maxD || candidate <= maxD)){
+      row.date = candidate;
+    }
+  }
+
   rows.push(row);
 
   const wrapper = document.createElement('div');
@@ -444,6 +460,7 @@ function addRow(){
 
   row.el = { wrapper, badge, resultsDiv, removeBtn, dateTrigger, calPopup, calTitleEl, calGridEl, prevBtn, nextBtn };
 
+  updateDateTrigger(row);
   initRowCalendarView(row);
   renderRowCalendar(row);
 

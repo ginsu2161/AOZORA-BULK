@@ -379,24 +379,7 @@ function notesMarkup(row){
       notes.push('FIT料金は予想金額のため、多少の誤差がある場合がございます。');
     }
   }
-  const noteHtml = notes.map(n => `<div class="row-fit-note">${n}</div>`).join('');
-
-  let policyHtml = '';
-  if(row.hotel){
-    const childPolicy = DB.child_policy && DB.child_policy[row.hotel];
-    const cancelPolicy = DB.cancel_policy && DB.cancel_policy[row.hotel];
-    const extraNotice = DB.extra_notice && DB.extra_notice[row.hotel];
-    if(childPolicy || cancelPolicy || extraNotice){
-      policyHtml = `
-        <div class="row-policy">
-          ${childPolicy ? `<div class="policy-row"><span class="policy-label">子供料金</span><span class="policy-text">${childPolicy}</span></div>` : ''}
-          ${cancelPolicy ? `<div class="policy-row"><span class="policy-label">キャンセル料</span><span class="policy-text">${cancelPolicy}</span></div>` : ''}
-          ${extraNotice ? `<div class="policy-row"><span class="policy-label">その他のご案内</span><span class="policy-text">${extraNotice}</span></div>` : ''}
-        </div>`;
-    }
-  }
-
-  return noteHtml + policyHtml;
+  return notes.map(n => `<div class="row-fit-note">${n}</div>`).join('');
 }
 
 function updateRowResults(id){
